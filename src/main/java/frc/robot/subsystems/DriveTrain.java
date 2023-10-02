@@ -11,11 +11,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
- private static TalonSRX motor;
+ private static TalonSRX motor1;
+ private static TalonSRX motor2;
  public DriveTrain(){
-  motor = new TalonSRX(Constants.MOTOR_ID);
+  motor1 = new TalonSRX(Constants.MOTOR_ID_1);
+  motor2 = new TalonSRX(Constants.MOTOR_ID_2);
  }
  public static void setRaw(double value){
-  motor.set(ControlMode.PercentOutput, value);
- }
+    motor1.set(ControlMode.PercentOutput, value);
+    motor2.set(ControlMode.PercentOutput, value);
+   }
 }
