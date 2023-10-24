@@ -5,10 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveTrain;
 
 public class PositionPreset extends CommandBase {
   /** Creates a new PositionPreset. */
-  public PositionPreset() {
+  DriveTrain driveTrain;
+  public PositionPreset(DriveTrain driveTrain) {
+    this.driveTrain = driveTrain;
+    addRequirements(driveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -18,8 +22,12 @@ public class PositionPreset extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
-
+  public void execute() {
+    driveTrain.setPosition(10000);
+    if(driveTrain.isAtSetpoint(10000, 100)){
+      driveTrain.stopMotor();
+    }
+  }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

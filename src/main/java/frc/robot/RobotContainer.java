@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.MoveMotor;
+import frc.robot.commands.PositionPreset;
 import frc.robot.subsystems.DriveTrain;
 
 import java.util.function.DoubleSupplier;
@@ -13,6 +14,7 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -30,14 +32,15 @@ public class RobotContainer {
 
   /* Controls */
   private final int motorAxis = XboxController.Axis.kLeftY.value;
-
+  JoystickButton aButton; 
   // Commands //
   MoveMotor moveMotor;
-
+  PositionPreset positionPreset = new PositionPreset(driveTrain);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveTrain.setDefaultCommand(new MoveMotor(driveTrain, () -> driver.getRawAxis(motorAxis)));
     // Configure the trigger bindings
+    aButton = new JoystickButton(driver, 1);
     configureBindings();
   }
 
@@ -51,7 +54,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+    aButton.onTrue(positionPreset);
   }
 
   /**

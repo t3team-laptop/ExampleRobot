@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class MoveMotor extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveTrain m_subsystem;
+  private final DriveTrain driveTrain;
   private DoubleSupplier value;
 
   /**
@@ -23,11 +23,11 @@ public class MoveMotor extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public MoveMotor(DriveTrain subsystem, DoubleSupplier d) {
-    m_subsystem = subsystem;
+  public MoveMotor(DriveTrain driveTrain, DoubleSupplier d) {
+    this.driveTrain = driveTrain;
     this.value = d ;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(driveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -40,7 +40,7 @@ public class MoveMotor extends CommandBase {
     double deadbandVal = MathUtil.applyDeadband(value.getAsDouble(), Constants.stickDeadband) *-1;
 
     /* Move */
-    DriveTrain.setRaw(deadbandVal);
+    driveTrain.setOutput(deadbandVal);
   }
 
   // Called once the command ends or is interrupted.
