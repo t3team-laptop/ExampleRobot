@@ -29,8 +29,7 @@ public class DriveTrain extends SubsystemBase {
    private static CANSparkMax LeftMotor;
    private static CANSparkMax RightMotor;
    private static SparkMaxPIDController pidController;
-   EncoderSim LeftEncoderSim;
-   EncoderSim RightEncoderSim;
+
  
    public DriveTrain(){
 
@@ -46,6 +45,7 @@ public class DriveTrain extends SubsystemBase {
       pidController.setP( .01, 0);
       pidController.setI(.001, 0);
       pidController.setD(.1, 0);
+      
    }
 
    public void setOutput(double output){
